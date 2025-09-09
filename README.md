@@ -26,59 +26,59 @@ Proyecto fullstack para análisis estadístico de mejoras en tiempo de atención
 
 ```
 mini-kaizen-cafeteria/
-├── 📁 backend/                    # 🔧 API Python (FastAPI)
-│   ├── 📖 README.md              # 📚 Documentación completa del backend
-│   ├── 🚀 main.py                # 🎯 Punto de entrada principal
-│   ├── 📦 requirements.txt       # 🐍 Dependencias Python
-│   ├── 🐳 Dockerfile             # 🐳 Configuración Docker
-│   ├── ⚙️ pyrightconfig.json     # 🔍 Configuración Pyright
-│   ├── 📂 src/                   # 💻 Código fuente principal
-│   │   ├── 🎲 generate_data.py      # 📊 Generador de datos simulados
-│   │   ├── 📈 statistical_analysis.py # 🔬 Análisis estadístico completo
-│   │   └── 📊 visualization.py      # 🎨 Generación de gráficos
-│   ├── 📊 reports/               # 📈 Reportes y gráficos generados
-│   ├── 🖼️ static/                # 📁 Archivos estáticos servidos
-│   └── 🐍 .venv/                 # 🌐 Virtual environment (desarrollo)
-├── 📁 frontend/                  # ⚛️ Aplicación React
-│   ├── 📖 README.md              # 📚 Documentación completa del frontend
-│   ├── 🌐 index.html             # 🎯 HTML principal
-│   ├── 📦 package.json           # 📋 Configuración y dependencias
-│   ├── 🐳 Dockerfile             # 🐳 Configuración Docker
-│   ├── ⚙️ vite.config.js         # ⚡ Configuración de Vite
-│   ├── 🎨 tailwind.config.js     # 💅 Configuración de Tailwind
-│   ├── 📂 src/                   # 💻 Código fuente React
-│   │   ├── 🏠 App.jsx               # 🎯 Componente principal
-│   │   ├── 🚀 main.jsx             # 🎯 Punto de entrada React
-│   │   ├── 🎨 index.css            # 💅 Estilos globales
-│   │   ├── 🖼️ assets/              # 📁 Recursos estáticos
-│   │   ├── 🧩 components/          # 🔧 Componentes reutilizables
-│   │   ├── 📄 pages/               # 📱 Páginas principales
-│   │   ├── 🔗 services/            # 🌐 Comunicación con API
-│   │   ├── 🪝 hooks/               # 🎣 Hooks personalizados
-│   │   └── 🛠️ utils/               # 🔧 Utilidades
-│   └── 🌐 nginx.conf              # 🌐 Configuración Nginx
-├── 📁 scripts/                   # 🚀 Scripts de automatización
-│   ├── 🚀 deploy.sh              # 📦 Deployment automatizado
-│   ├── 📋 logs.sh                # 📝 Monitoreo de logs
-│   ├── 🛑 stop.sh                # ⏹️ Detención de servicios
-│   └── ✅ health-check.sh        # 🔍 Verificación de salud
-├── 📁 .github/                   # 🤖 CI/CD
-│   └── 📋 workflows/             # 🔄 GitHub Actions
-├── 🐳 docker-compose.yml         # 🐳 Configuración desarrollo
-├── 🐳 docker-compose.prod.yml    # 🐳 Configuración producción
-├── 📖 README.md                  # 📚 Documentación principal
-├── 🔧 .gitignore                 # 🚫 Archivos ignorados
-├── 🌐 .dockerignore              # 🚫 Docker build exclusions
-└── ⚙️ .env.example               # 🔑 Variables de entorno
+├── backend/                    # API Python (FastAPI)
+│   ├── README.md               # Documentación completa del backend
+│   ├── main.py                 # Punto de entrada principal
+│   ├── requirements.txt        # Dependencias Python
+│   ├── Dockerfile              # Configuración Docker
+│   ├── pyrightconfig.json      # Configuración Pyright
+│   ├── src/                    # Código fuente principal
+│   │   ├── generate_data.py       # Generador de datos simulados
+│   │   ├── statistical_analysis.py # Análisis estadístico completo
+│   │   └── visualization.py       # Generación de gráficos
+│   ├── reports/                # Reportes y gráficos generados
+│   ├── static/                 # Archivos estáticos servidos
+│   └── .venv/                  # Virtual environment (desarrollo)
+├── frontend/                   # Aplicación React
+│   ├── README.md               # Documentación completa del frontend
+│   ├── index.html              # HTML principal
+│   ├── package.json            # Configuración y dependencias
+│   ├── Dockerfile              # Configuración Docker
+│   ├── vite.config.js          # Configuración de Vite
+│   ├── tailwind.config.js      # Configuración de Tailwind
+│   ├── src/                    # Código fuente React
+│   │   ├── App.jsx                # Componente principal
+│   │   ├── main.jsx              # Punto de entrada React
+│   │   ├── index.css             # Estilos globales
+│   │   ├── assets/               # Recursos estáticos
+│   │   ├── components/           # Componentes reutilizables
+│   │   ├── pages/                # Páginas principales
+│   │   ├── services/             # Comunicación con API
+│   │   ├── hooks/                # Hooks personalizados
+│   │   └── utils/                # Utilidades
+│   └── nginx.conf               # Configuración Nginx
+├── scripts/                    # Scripts de automatización
+│   ├── deploy.sh               # Deployment automatizado
+│   ├── logs.sh                 # Monitoreo de logs
+│   ├── stop.sh                 # Detención de servicios
+│   └── health-check.sh         # Verificación de salud
+├── .github/                    # CI/CD
+│   └── workflows/              # GitHub Actions
+├── docker-compose.yml          # Configuración desarrollo
+├── docker-compose.prod.yml     # Configuración producción
+├── README.md                   # Documentación principal
+├── .gitignore                  # Archivos ignorados
+├── .dockerignore               # Docker build exclusions
+└── .env.example                # Variables de entorno
 ```
 
 ### 📚 Documentación Detallada
 
 Para información completa sobre cada parte del proyecto:
 
-- **📖 [Backend Documentation](backend/README.md)** - API FastAPI, análisis estadístico, configuración
-- **📖 [Frontend Documentation](frontend/README.md)** - React, componentes, UI/UX, configuración
-- **🚀 [Deployment Guide](coolify-deployment.md)** - Guía completa de deployment con Coolify
+- **[Backend Documentation](backend/README.md)** - API FastAPI, análisis estadístico, configuración
+- **[Frontend Documentation](frontend/README.md)** - React, componentes, UI/UX, configuración
+- **[Deployment Guide](coolify-deployment.md)** - Guía completa de deployment con Coolify
 
 ## 🚀 Instalación y configuración
 

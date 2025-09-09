@@ -17,39 +17,39 @@ Interfaz web moderna desarrollada con **React + Vite** para análisis estadísti
 
 ```
 frontend/
-├── public/                    # 📂 Archivos públicos estáticos
-│   └── vite.svg              # 🚀 Logo de Vite
-├── src/                      # 📂 Código fuente principal
-│   ├── App.jsx               # 🎯 Componente principal de la aplicación
-│   ├── main.jsx              # 🚀 Punto de entrada de React
-│   ├── index.css             # 🎨 Estilos globales y Tailwind
-│   ├── App.css               # 🎨 Estilos específicos de la app
-│   ├── assets/               # 🖼️ Recursos estáticos (imágenes, iconos)
-│   │   └── react.svg         # ⚛️ Logo de React
-│   ├── components/           # 🧩 Componentes reutilizables
-│   │   ├── ui/              # 🎨 Componentes de UI básicos
-│   │   └── layout/          # 📐 Componentes de layout
-│   ├── pages/               # 📄 Páginas principales de la aplicación
-│   │   ├── HomePage.jsx     # 🏠 Página de inicio
-│   │   ├── SimulationPage.jsx # 🎲 Página de simulación de datos
-│   │   ├── AnalysisPage.jsx # 📊 Página de análisis estadístico
-│   │   └── DashboardPage.jsx # 📈 Dashboard con visualizaciones
-│   ├── services/            # 🔗 Servicios y comunicación con API
-│   │   └── api.js           # 🌐 Configuración de Axios y endpoints
-│   ├── hooks/               # 🪝 Hooks personalizados de React
-│   └── utils/               # 🛠️ Utilidades y helpers
-├── dist/                    # 📦 Archivos de producción (generados)
-├── node_modules/           # 📚 Dependencias instaladas
-├── package.json            # 📦 Configuración del proyecto y dependencias
-├── package-lock.json       # 🔒 Lockfile de dependencias
-├── vite.config.js          # ⚙️ Configuración de Vite
-├── tailwind.config.js      # 🎨 Configuración de Tailwind CSS
-├── postcss.config.js       # ⚙️ Configuración de PostCSS
-├── eslint.config.js        # 🔍 Configuración de ESLint
-├── index.html              # 🌐 HTML principal
-├── nginx.conf              # 🌐 Configuración de Nginx para producción
-├── Dockerfile              # 🐳 Configuración Docker
-└── .dockerignore          # 🚫 Archivos excluidos del build Docker
+├── public/                    # Archivos públicos estáticos
+│   └── vite.svg              # Logo de Vite
+├── src/                      # Código fuente principal
+│   ├── App.jsx               # Componente principal de la aplicación
+│   ├── main.jsx              # Punto de entrada de React
+│   ├── index.css             # Estilos globales y Tailwind
+│   ├── App.css               # Estilos específicos de la app
+│   ├── assets/               # Recursos estáticos (imágenes, iconos)
+│   │   └── react.svg         # Logo de React
+│   ├── components/           # Componentes reutilizables
+│   │   ├── ui/               # Componentes de UI básicos
+│   │   └── layout/           # Componentes de layout
+│   ├── pages/                # Páginas principales de la aplicación
+│   │   ├── HomePage.jsx      # Página de inicio
+│   │   ├── SimulationPage.jsx # Página de simulación de datos
+│   │   ├── AnalysisPage.jsx  # Página de análisis estadístico
+│   │   └── DashboardPage.jsx # Dashboard con visualizaciones
+│   ├── services/             # Servicios y comunicación con API
+│   │   └── api.js            # Configuración de Axios y endpoints
+│   ├── hooks/                # Hooks personalizados de React
+│   └── utils/                # Utilidades y helpers
+├── dist/                     # Archivos de producción (generados)
+├── node_modules/            # Dependencias instaladas
+├── package.json             # Configuración del proyecto y dependencias
+├── package-lock.json        # Lockfile de dependencias
+├── vite.config.js           # Configuración de Vite
+├── tailwind.config.js       # Configuración de Tailwind CSS
+├── postcss.config.js        # Configuración de PostCSS
+├── eslint.config.js         # Configuración de ESLint
+├── index.html               # HTML principal
+├── nginx.conf               # Configuración de Nginx para producción
+├── Dockerfile               # Configuración Docker
+└── .dockerignore           # Archivos excluidos del build Docker
 ```
 
 ## 🛠️ Instalación y Configuración

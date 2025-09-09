@@ -16,20 +16,20 @@ API REST desarrollada con **FastAPI** para análisis estadístico de mejoras en 
 
 ```
 backend/
-├── main.py                 # 🚀 Punto de entrada principal de la API
-├── requirements.txt        # 📦 Dependencias Python
-├── Dockerfile             # 🐳 Configuración Docker
-├── .dockerignore         # 🚫 Archivos excluidos del build Docker
-├── pyrightconfig.json    # ⚙️ Configuración Pyright (type checking)
-├── src/                  # 📂 Código fuente principal
+├── main.py                 # Punto de entrada principal de la API
+├── requirements.txt        # Dependencias Python
+├── Dockerfile              # Configuración Docker
+├── .dockerignore           # Archivos excluidos del build Docker
+├── pyrightconfig.json      # Configuración Pyright (type checking)
+├── src/                    # Código fuente principal
 │   ├── __init__.py
-│   ├── generate_data.py      # 🎲 Generador de datos simulados
-│   ├── statistical_analysis.py # 📊 Análisis estadístico completo
-│   └── visualization.py      # 📈 Generación de gráficos
-├── reports/              # 📊 Reportes y gráficos generados
-│   └── simulation_data.csv   # 💾 Datos de simulación
-├── static/               # 🖼️ Archivos estáticos servidos
-└── .venv/               # 🐍 Virtual environment (desarrollo local)
+│   ├── generate_data.py       # Generador de datos simulados
+│   ├── statistical_analysis.py # Análisis estadístico completo
+│   └── visualization.py       # Generación de gráficos
+├── reports/                # Reportes y gráficos generados
+│   └── simulation_data.csv    # Datos de simulación
+├── static/                 # Archivos estáticos servidos
+└── .venv/                  # Virtual environment (desarrollo local)
 ```
 
 ## 🛠️ Instalación y Configuración
