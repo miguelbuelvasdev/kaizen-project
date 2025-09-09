@@ -1,359 +1,390 @@
 # Frontend - Mini Kaizen Cafetería
 
-Interfaz web moderna desarrollada con **React + Vite** para análisis estadístico de mejoras en tiempos de atención usando metodología Kaizen.
+Interfaz de usuario moderna desarrollada con React para visualización y control del análisis estadístico de mejoras en tiempos de atención.
 
-## 🚀 Tecnologías
+## 🎨 Tecnologías
 
-- **React 18** - Biblioteca de interfaz de usuario
-- **Vite** - Build tool ultrarrápido para desarrollo moderno
-- **Tailwind CSS** - Framework CSS utilitario
-- **React Router DOM** - Navegación SPA
-- **Recharts** - Gráficos interactivos y visualizaciones
-- **Axios** - Cliente HTTP para comunicación con API
-- **Lucide React** - Iconos modernos y consistentes
-- **React Hooks** - Gestión de estado y efectos
+- **React 19**: Framework JavaScript moderno
+- **Vite**: Herramienta de construcción rápida
+- **Tailwind CSS**: Framework CSS utilitario
+- **React Router**: Navegación SPA
+- **Axios**: Cliente HTTP para APIs
+- **Recharts**: Librería de gráficos React
+- **Lucide React**: Iconos modernos y consistentes
 
-## 📁 Estructura del Frontend
+## 📁 Estructura
 
 ```
 frontend/
-├── public/                    # Archivos públicos estáticos
-│   └── vite.svg              # Logo de Vite
-├── src/                      # Código fuente principal
-│   ├── App.jsx               # Componente principal de la aplicación
-│   ├── main.jsx              # Punto de entrada de React
-│   ├── index.css             # Estilos globales y Tailwind
-│   ├── App.css               # Estilos específicos de la app
-│   ├── assets/               # Recursos estáticos (imágenes, iconos)
-│   │   └── react.svg         # Logo de React
-│   ├── components/           # Componentes reutilizables
-│   │   ├── ui/               # Componentes de UI básicos
-│   │   └── layout/           # Componentes de layout
-│   ├── pages/                # Páginas principales de la aplicación
-│   │   ├── HomePage.jsx      # Página de inicio
-│   │   ├── SimulationPage.jsx # Página de simulación de datos
-│   │   ├── AnalysisPage.jsx  # Página de análisis estadístico
-│   │   └── DashboardPage.jsx # Dashboard con visualizaciones
-│   ├── services/             # Servicios y comunicación con API
-│   │   └── api.js            # Configuración de Axios y endpoints
-│   ├── hooks/                # Hooks personalizados de React
-│   └── utils/                # Utilidades y helpers
-├── dist/                     # Archivos de producción (generados)
-├── node_modules/            # Dependencias instaladas
-├── package.json             # Configuración del proyecto y dependencias
-├── package-lock.json        # Lockfile de dependencias
-├── vite.config.js           # Configuración de Vite
-├── tailwind.config.js       # Configuración de Tailwind CSS
-├── postcss.config.js        # Configuración de PostCSS
-├── eslint.config.js         # Configuración de ESLint
-├── index.html               # HTML principal
-├── nginx.conf               # Configuración de Nginx para producción
-├── Dockerfile               # Configuración Docker
-└── .dockerignore           # Archivos excluidos del build Docker
+├── public/                   # Archivos públicos estáticos
+├── src/
+│   ├── components/          # Componentes reutilizables
+│   │   ├── ui/             # Componentes base de UI
+│   │   └── layout/         # Componentes de layout
+│   ├── pages/              # Páginas principales
+│   │   ├── HomePage.jsx    # Página de inicio
+│   │   ├── SimulationPage.jsx # Configuración de simulación
+│   │   ├── AnalysisPage.jsx # Resultados del análisis
+│   │   └── DashboardPage.jsx # Dashboard completo
+│   ├── services/           # Servicios y APIs
+│   │   └── api.js          # Cliente API
+│   ├── utils/              # Utilidades
+│   ├── App.jsx             # Componente principal
+│   ├── main.jsx            # Punto de entrada
+│   └── index.css           # Estilos globales
+├── package.json            # Dependencias y scripts
+├── vite.config.js          # Configuración Vite
+├── tailwind.config.js      # Configuración Tailwind
+└── README.md              # Esta documentación
 ```
 
-## 🛠️ Instalación y Configuración
+## 🚀 Instalación
 
-### Opción 1: Docker (Recomendado)
+### Prerrequisitos
 
-```bash
-# Desde el directorio raíz del proyecto
-cd ../  # Ir al directorio raíz
+- Node.js 16 o superior
+- npm o yarn
 
-# Para desarrollo
-../scripts/deploy.sh dev
-
-# Para producción
-../scripts/deploy.sh prod
-
-# Verificar estado
-../scripts/health-check.sh
-```
-
-### Opción 2: Desarrollo Local
+### Configuración del proyecto
 
 ```bash
 # Instalar dependencias
 npm install
 
 # Verificar instalación
-npm list react-router-dom recharts axios lucide-react
+npm run dev
+```
 
+## 🏃‍♂️ Ejecución
+
+### Desarrollo
+```bash
 # Iniciar servidor de desarrollo
 npm run dev
 
-# La aplicación estará disponible en: http://localhost:5173
+# La aplicación estará disponible en http://localhost:5173
 ```
 
-### Opción 3: Build de Producción
-
+### Producción
 ```bash
-# Crear build optimizado
+# Construir para producción
 npm run build
 
-# Vista previa del build
+# Vista previa de la build
 npm run preview
 
-# Servir con servidor estático
-npx serve dist
+# O usando Docker
+docker build -t kaizen-frontend .
+docker run -p 80:80 kaizen-frontend
 ```
 
-## 🎯 Funcionalidades Principales
+## 🎯 Páginas principales
 
-### 1. 🏠 Página de Inicio (HomePage)
-- **Ubicación**: `src/pages/HomePage.jsx`
-- **Función**: Página de bienvenida con navegación principal
-- **Características**:
-  - Introducción al proyecto Kaizen
-  - Navegación intuitiva a todas las secciones
-  - Diseño responsive con Tailwind CSS
+### HomePage (`/`)
+- **Descripción**: Página de bienvenida con navegación principal
+- **Funcionalidades**:
+  - Introducción al proyecto
+  - Navegación a secciones principales
+  - Información general sobre Kaizen
 
-### 2. 🎲 Simulación de Datos (SimulationPage)
-- **Ubicación**: `src/pages/SimulationPage.jsx`
-- **Función**: Configuración y generación de datos simulados
-- **Características**:
-  - Formulario interactivo para parámetros
-  - Validación en tiempo real
-  - Generación de datos estadísticos realistas
-  - Visualización previa de parámetros
+### SimulationPage (`/simulation`)
+- **Descripción**: Configuración de parámetros de simulación
+- **Funcionalidades**:
+  - Formulario de configuración
+  - Validación de parámetros
+  - Ejecución de simulación
+  - Navegación a resultados
 
-### 3. 📊 Análisis Estadístico (AnalysisPage)
-- **Ubicación**: `src/pages/AnalysisPage.jsx`
-- **Función**: Visualización de resultados estadísticos
-- **Características**:
-  - Resultados del Welch t-test
-  - Cálculo de Cohen's d
-  - Interpretación de significancia estadística
-  - Impacto de negocio cuantificado
+### AnalysisPage (`/analysis`)
+- **Descripción**: Visualización de resultados estadísticos
+- **Funcionalidades**:
+  - Tabla de resultados numéricos
+  - Interpretación de resultados
+  - Conclusiones del análisis
+  - Navegación entre secciones
 
-### 4. 📈 Dashboard Completo (DashboardPage)
-- **Ubicación**: `src/pages/DashboardPage.jsx`
-- **Función**: Visualizaciones interactivas y dashboard completo
-- **Características**:
-  - Múltiples tipos de gráficos (histogramas, box plots)
-  - Dashboard responsivo con pestañas
-  - Exportación de imágenes
-  - Interactividad con Recharts
+### DashboardPage (`/dashboard`)
+- **Descripción**: Dashboard completo con visualizaciones
+- **Funcionalidades**:
+  - Gráficos interactivos
+  - Métricas clave
+  - Comparaciones visuales
+  - Exportación de resultados
 
-## 🔗 Comunicación con API
+## 🔧 Configuración
 
-### Configuración de Axios
-- **Archivo**: `src/services/api.js`
-- **Base URL**: `http://localhost:8000` (desarrollo) / API_URL (producción)
-- **Configuración**:
-  - Timeouts apropiados
-  - Headers por defecto
-  - Interceptores de error
+### Variables de entorno
 
-### Endpoints Utilizados
+```bash
+# Archivo .env
+VITE_API_URL=http://localhost:8000
+```
+
+### API Communication
 
 ```javascript
-// Simulación de datos
-POST /simulate
-GET /data/current
-POST /reset
+// src/services/api.js
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
 
-// Análisis estadístico
-GET /analyze
-
-// Visualizaciones
-GET /plots/histogram
-GET /plots/boxplot
-GET /plots/dashboard
+// Funciones para comunicación con backend
+export const apiService = {
+  simulate: (params) => axios.post(`${API_BASE_URL}/api/simulate`, params),
+  getResults: () => axios.get(`${API_BASE_URL}/api/results`),
+  getPlot: (type) => axios.get(`${API_BASE_URL}/api/plots/${type}`, {
+    responseType: 'blob'
+  })
+};
 ```
 
-## 🎨 Diseño y UI/UX
+## 🎨 Estilos y UI
 
 ### Tailwind CSS
 - **Configuración**: `tailwind.config.js`
 - **Estilos globales**: `src/index.css`
-- **Componentes**: Diseño utilitario y consistente
-- **Responsive**: Mobile-first approach
+- **Clases utilitarias**: Aplicadas directamente en componentes
 
-### Componentes Reutilizables
-- **Ubicación**: `src/components/`
-- **Tipos**:
-  - Componentes de UI básicos (botones, inputs, cards)
-  - Componentes de layout (header, footer, sidebar)
-  - Componentes específicos de la aplicación
+### Componentes UI
+- **Botones**: Variantes primary, secondary, danger
+- **Formularios**: Inputs, selects, validación visual
+- **Cards**: Contenedores con sombras y bordes
+- **Navegación**: Header con menú responsive
 
-### Iconos
-- **Librería**: Lucide React
-- **Uso**: Iconos consistentes y modernos
-- **Ejemplos**: `Play`, `BarChart3`, `TrendingUp`, `Download`
+### Tema
+- **Colores**: Azul primario (#3B82F6), gris neutro
+- **Tipografía**: Sans-serif moderna
+- **Espaciado**: Sistema consistente de márgenes y padding
 
-## 🔄 Estado y Gestión de Datos
+## 📊 Visualizaciones
 
-### React Hooks Utilizados
-- **`useState`**: Gestión de estado local
-- **`useEffect`**: Efectos secundarios y ciclo de vida
-- **`useContext`**: Estado global (si es necesario)
-
-### Flujo de Datos
-1. **Usuario configura parámetros** → SimulationPage
-2. **Envío a API** → services/api.js
-3. **Procesamiento backend** → Análisis estadístico
-4. **Recepción de resultados** → AnalysisPage/DashboardPage
-5. **Visualización interactiva** → Recharts components
-
-## 📊 Visualizaciones con Recharts
-
-### Tipos de Gráficos
-- **Histogramas**: Distribución de frecuencias
-- **Box Plots**: Comparación de distribuciones
-- **Gráficos de densidad**: Curvas de distribución
-- **Dashboard combinado**: Múltiples visualizaciones
-
-### Configuración de Gráficos
+### Recharts Integration
 ```jsx
-<ResponsiveContainer width="100%" height={400}>
-  <BarChart data={data}>
-    <CartesianGrid strokeDasharray="3 3" />
-    <XAxis dataKey="name" />
+import { LineChart, Line, XAxis, YAxis, ResponsiveContainer } from 'recharts';
+
+// Componente de gráfico de línea
+<ResponsiveContainer width="100%" height={300}>
+  <LineChart data={data}>
+    <XAxis dataKey="time" />
     <YAxis />
-    <Tooltip />
-    <Legend />
-    <Bar dataKey="value" fill="#8884d8" />
-  </BarChart>
+    <Line type="monotone" dataKey="value" stroke="#3B82F6" />
+  </LineChart>
 </ResponsiveContainer>
 ```
 
-## ⚙️ Configuración de Desarrollo
+### Tipos de gráficos
+- **Histogramas**: Distribución de frecuencias
+- **Box plots**: Resumen estadístico de cinco números
+- **Gráficos de línea**: Tendencias temporales
+- **Dashboards**: Combinación de múltiples visualizaciones
 
-### Vite Configuration
-- **Archivo**: `vite.config.js`
-- **Características**:
-  - Servidor de desarrollo rápido
-  - Hot Module Replacement (HMR)
-  - Optimización de build
-  - Configuración de paths
+## 🔄 Estado y datos
 
-### ESLint Configuration
-- **Archivo**: `eslint.config.js`
-- **Reglas**: Configuración moderna para React
-- **Integración**: Con VS Code y otros editores
+### Gestión de estado
+- **useState**: Estado local de componentes
+- **useEffect**: Efectos secundarios y carga de datos
+- **Context API**: Estado global si es necesario
 
-### PostCSS Configuration
-- **Archivo**: `postcss.config.js`
-- **Plugins**: Tailwind CSS y autoprefixer
+### Carga de datos
+```jsx
+// Ejemplo de carga de datos
+const [data, setData] = useState(null);
+const [loading, setLoading] = useState(true);
 
-## 🌐 Variables de Entorno
+useEffect(() => {
+  const fetchData = async () => {
+    try {
+      const response = await apiService.getResults();
+      setData(response.data);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-| Variable | Default | Descripción |
-|----------|---------|-------------|
-| `VITE_API_URL` | `http://localhost:8000` | URL base de la API |
-
-### Archivo `.env`
-```bash
-# Desarrollo
-VITE_API_URL=http://localhost:8000
-
-# Producción
-VITE_API_URL=https://api.tu-dominio.com
+  fetchData();
+}, []);
 ```
 
-## 🐛 Solución de Problemas
+## 🧭 Navegación
 
-### Error: "Module not found"
+### React Router
+```jsx
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+
+function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/simulation" element={<SimulationPage />} />
+        <Route path="/analysis" element={<AnalysisPage />} />
+        <Route path="/dashboard" element={<DashboardPage />} />
+      </Routes>
+    </BrowserRouter>
+  );
+}
+```
+
+### Navegación programática
+```jsx
+import { useNavigate } from 'react-router-dom';
+
+const navigate = useNavigate();
+
+// Navegar a otra página
+const handleNavigation = () => {
+  navigate('/analysis');
+};
+```
+
+## 📱 Responsive Design
+
+### Breakpoints
+- **Mobile**: < 640px
+- **Tablet**: 640px - 1024px
+- **Desktop**: > 1024px
+
+### Componentes responsive
+```jsx
+// Ejemplo de diseño responsive
+<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+  {/* Contenido responsive */}
+</div>
+```
+
+## 🐛 Solución de problemas
+
+### Error de dependencias
 ```bash
-# Limpiar node_modules y reinstalar
+# Limpiar caché de npm
+npm cache clean --force
+
+# Reinstalar dependencias
 rm -rf node_modules package-lock.json
 npm install
 ```
 
-### Error: "Tailwind CSS not working"
+### Error de CORS
 ```bash
-# Verificar configuración
-npm run build  # Debería procesar Tailwind correctamente
+# Verificar que el backend esté corriendo
+# Verificar configuración CORS en backend
+# Verificar VITE_API_URL en .env
 ```
 
-### Error: "API connection failed"
+### Problemas con Vite
 ```bash
-# Verificar que el backend esté ejecutándose
-curl http://localhost:8000/health
+# Limpiar caché de Vite
+rm -rf node_modules/.vite
 
-# Verificar configuración de CORS en el backend
+# Reiniciar servidor de desarrollo
+npm run dev
 ```
 
-### Error: "Recharts component not rendering"
+### Error de build
 ```bash
-# Verificar imports correctos
-import { BarChart, Bar, XAxis, YAxis, ResponsiveContainer } from 'recharts';
-```
-
-## 🚀 Optimización y Rendimiento
-
-### Build de Producción
-- **Optimización automática**: Vite optimiza el bundle
-- **Code splitting**: División automática de código
-- **Tree shaking**: Eliminación de código no utilizado
-- **Minificación**: CSS y JS minificados
-
-### Imágenes y Assets
-- **Optimización**: Vite procesa y optimiza imágenes
-- **Lazy loading**: Carga diferida de componentes
-- **Caching**: Headers apropiados para caching
-
-## 🔧 Desarrollo y Contribución
-
-### Agregar Nueva Página
-1. Crear componente en `src/pages/`
-2. Agregar ruta en `src/App.jsx`
-3. Actualizar navegación si es necesario
-
-### Agregar Nuevo Componente
-1. Crear en `src/components/` (UI) o ubicación apropiada
-2. Exportar desde `src/components/index.js` (opcional)
-3. Usar en páginas o otros componentes
-
-### Agregar Nueva Visualización
-1. Instalar dependencias de gráficos si es necesario
-2. Crear componente con Recharts
-3. Integrar en DashboardPage o página correspondiente
-
-### Mejores Prácticas
-- Usar functional components con hooks
-- Mantener componentes pequeños y reutilizables
-- Usar Tailwind para estilos consistentes
-- Documentar props con PropTypes o TypeScript
-- Seguir convención de nomenclatura
-
-## 📱 Responsive Design
-
-### Breakpoints de Tailwind
-- **sm**: 640px+
-- **md**: 768px+
-- **lg**: 1024px+
-- **xl**: 1280px+
-
-### Diseño Mobile-First
-- Componentes adaptables automáticamente
-- Navegación touch-friendly
-- Optimización de rendimiento en móviles
-
-## 🧪 Testing
-
-### Ejecutar Tests
-```bash
-# Si hay tests configurados
-npm run test
-
-# Ejecutar ESLint
+# Verificar sintaxis
 npm run lint
+
+# Verificar tipos (si usas TypeScript)
+npm run type-check
 ```
 
-### Configuración de Tests
-- **Framework**: Jest + React Testing Library (recomendado)
-- **Configuración**: En `package.json` o archivo separado
+## 🧪 Desarrollo
 
-## 📞 Soporte
+### Agregar nueva página
+1. Crear componente en `src/pages/`
+2. Agregar ruta en `App.jsx`
+3. Actualizar navegación si es necesario
+4. Probar navegación y funcionalidad
 
-Para soporte técnico:
-- 📧 Email: contacto@miguelbuelvasdev.com
-- 🔗 LinkedIn: [miguelbuelvasdev](https://linkedin.com/in/miguelbuelvasdev)
-- 📱 Instagram: [@miguelbuelvasdev](https://instagram.com/miguelbuelvasdev)
-- 💻 GitHub: [miguelbuelvasdev](https://github.com/miguelbuelvasdev)
+### Agregar nuevo componente
+1. Crear componente en `src/components/`
+2. Definir props y estado
+3. Implementar lógica
+4. Aplicar estilos con Tailwind
+5. Exportar e importar donde se use
 
----
+### Modificar estilos
+1. Editar `tailwind.config.js` para tema global
+2. Modificar `src/index.css` para estilos globales
+3. Usar clases de Tailwind en componentes
+4. Crear componentes de estilo reutilizables
 
-**🚀 Aplicación Lista**: `http://localhost:5173`
+## 🚀 Despliegue
+
+### Build de producción
+```bash
+# Crear build optimizado
+npm run build
+
+# Los archivos se generan en dist/
+```
+
+### Docker
+```dockerfile
+FROM node:18-alpine as build
+WORKDIR /app
+COPY package*.json ./
+RUN npm ci
+COPY . .
+RUN npm run build
+
+FROM nginx:alpine
+COPY --from=build /app/dist /usr/share/nginx/html
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
+```
+
+### Nginx Configuration
+```nginx
+server {
+    listen 80;
+    root /usr/share/nginx/html;
+    index index.html;
+
+    location / {
+        try_files $uri $uri/ /index.html;
+    }
+
+    location /api/ {
+        proxy_pass http://backend:8000/;
+    }
+}
+```
+
+## 📈 Optimización
+
+### Performance
+- **Lazy loading**: Componentes cargados bajo demanda
+- **Code splitting**: División del bundle
+- **Image optimization**: Imágenes optimizadas
+- **Caching**: Estrategias de caché apropiadas
+
+### SEO
+- **Meta tags**: Títulos y descripciones apropiadas
+- **Open Graph**: Para compartir en redes sociales
+- **Structured data**: Datos estructurados para buscadores
+
+## 🔒 Seguridad
+
+### Mejores prácticas
+- **Validación de entrada**: En formularios y APIs
+- **Sanitización**: De datos del usuario
+- **HTTPS**: En producción
+- **Content Security Policy**: Headers de seguridad
+
+## 📚 Documentación adicional
+
+- [React Documentation](https://react.dev/)
+- [Vite Documentation](https://vitejs.dev/)
+- [Tailwind CSS Documentation](https://tailwindcss.com/docs)
+- [React Router Documentation](https://reactrouter.com/)
+- [Recharts Documentation](https://recharts.org/)
+
+## 👨‍💻 Autor
+
+**Miguel Buelvas**
+- Email: contacto@miguelbuelvasdev.com
+- LinkedIn: [linkedin.com/in/miguelbuelvasdev](https://linkedin.com/in/miguelbuelvasdev)
+- Instagram: [@miguelbuelvasdev](https://instagram.com/miguelbuelvasdev)
+- GitHub: [github.com/miguelbuelvasdev](https://github.com/miguelbuelvasdev)

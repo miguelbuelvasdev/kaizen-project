@@ -1,79 +1,163 @@
 #!/bin/bash
 
-# Script de verificación de salud para Mini Kaizen Cafetería
-# Uso: ./scripts/health-check.sh
+# Mini Kaizen Cafetería - Health Check Script
+# Autor: Miguel Buelvas
 
 set -e
 
-BACKEND_URL="http://localhost:8000"
-FRONTEND_URL="http://localhost:3000"
+# Colores
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+BLUE='\033[0;34m'
+NC='\033[0m'
 
-echo "🔍 Verificando estado de los servicios..."
-echo "----------------------------------------"
+log() {
+    echo -e "${BLUE}[$(date +'%Y-%m-%d %H:%M:%S')]${NC} $1"
+}
 
-# Función para verificar endpoint
-check_endpoint() {
+success() {
+    echo -e "${GREEN}✅ $1${NC}"
+}
+
+error() {
+    echo -e "${RED}❌ $1${NC}"
+}
+
+warning() {
+    echo -e "${YELLOW}⚠️  $1${NC}"
+}
+
+# Verificar si un servicio está saludable
+check_service() {
     local url=$1
-    local service=$2
-    local expected_code=${3:-200}
+    local service_name=$2
+    local timeout=${3:-10}
 
-    echo -n "Verificando $service ($url)... "
+    log "Verificando $service_name en $url..."
 
-    if curl -s -o /dev/null -w "%{http_code}" "$url" | grep -q "^$expected_code$"; then
-        echo "✅ OK"
+    if curl -f -s --max-time $timeout "$url" > /dev/null 2>&1; then
+        success "$service_name está saludable"
         return 0
     else
-        echo "❌ FALLÓ"
+        error "$service_name no responde"
         return 1
     fi
 }
 
-# Verificar backend
-echo "🔧 Verificando Backend:"
-check_endpoint "$BACKEND_URL/health" "Backend Health" || BACKEND_FAIL=1
-check_endpoint "$BACKEND_URL/docs" "Backend API Docs" || BACKEND_FAIL=1
+# Verificar Docker containers
+check_containers() {
+    log "Verificando contenedores Docker..."
 
-# Verificar frontend
-echo ""
-echo "🌐 Verificando Frontend:"
-check_endpoint "$FRONTEND_URL" "Frontend" || FRONTEND_FAIL=1
+    local containers_up=0
+    local total_containers=0
 
-# Verificar contenedores Docker
-echo ""
-echo "🐳 Verificando Contenedores Docker:"
-if docker ps | grep -q "kaizen-backend"; then
-    echo "✅ Backend container: RUNNING"
-else
-    echo "❌ Backend container: NOT RUNNING"
-    CONTAINER_FAIL=1
-fi
+    # Verificar desarrollo
+    if docker-compose ps 2>/dev/null | grep -q "Up"; then
+        total_containers=$((total_containers + 2))
+        if docker-compose ps backend 2>/dev/null | grep -q "Up"; then
+            containers_up=$((containers_up + 1))
+            success "Backend (desarrollo) ejecutándose"
+        else
+            error "Backend (desarrollo) no ejecutándose"
+        fi
 
-if docker ps | grep -q "kaizen-frontend"; then
-    echo "✅ Frontend container: RUNNING"
-else
-    echo "❌ Frontend container: NOT RUNNING"
-    CONTAINER_FAIL=1
-fi
+        if docker-compose ps frontend 2>/dev/null | grep -q "Up"; then
+            containers_up=$((containers_up + 1))
+            success "Frontend (desarrollo) ejecutándose"
+        else
+            error "Frontend (desarrollo) no ejecutándose"
+        fi
+    fi
 
-# Resumen
-echo ""
-echo "📊 Resumen de Health Check:"
-echo "----------------------------------------"
+    # Verificar producción
+    if docker-compose -f docker-compose.prod.yml ps 2>/dev/null | grep -q "Up"; then
+        total_containers=$((total_containers + 2))
+        if docker-compose -f docker-compose.prod.yml ps backend 2>/dev/null | grep -q "Up"; then
+            containers_up=$((containers_up + 1))
+            success "Backend (producción) ejecutándose"
+        else
+            error "Backend (producción) no ejecutándose"
+        fi
 
-if [ -z "$BACKEND_FAIL" ] && [ -z "$FRONTEND_FAIL" ] && [ -z "$CONTAINER_FAIL" ]; then
-    echo "✅ Todos los servicios están funcionando correctamente"
-    echo "🌐 Aplicación disponible en: $FRONTEND_URL"
-    echo "🔗 API disponible en: $BACKEND_URL"
-    exit 0
-else
-    echo "❌ Algunos servicios tienen problemas:"
-    [ -n "$BACKEND_FAIL" ] && echo "  - Backend no responde correctamente"
-    [ -n "$FRONTEND_FAIL" ] && echo "  - Frontend no responde correctamente"
-    [ -n "$CONTAINER_FAIL" ] && echo "  - Uno o más contenedores no están ejecutándose"
+        if docker-compose -f docker-compose.prod.yml ps frontend 2>/dev/null | grep -q "Up"; then
+            containers_up=$((containers_up + 1))
+            success "Frontend (producción) ejecutándose"
+        else
+            error "Frontend (producción) no ejecutándose"
+        fi
+    fi
+
+    if [ $total_containers -eq 0 ]; then
+        warning "No hay contenedores ejecutándose"
+        return 1
+    fi
+
+    echo "Contenedores ejecutándose: $containers_up/$total_containers"
+    return $((total_containers - containers_up))
+}
+
+# Función principal
+main() {
+    local mode=${1:-"auto"}
+
+    echo "🔍 Verificación de salud - Mini Kaizen Cafetería"
+    echo "=============================================="
+
+    local health_status=0
+
+    # Verificar contenedores
+    if ! check_containers; then
+        health_status=1
+    fi
+
+    # Verificar endpoints HTTP
+    case $mode in
+        "dev")
+            log "Verificando endpoints de desarrollo..."
+            check_service "http://localhost:8000/health" "Backend API" || health_status=1
+            check_service "http://localhost:3000" "Frontend" || health_status=1
+            ;;
+        "prod")
+            log "Verificando endpoints de producción..."
+            check_service "http://localhost:8000/health" "Backend API" || health_status=1
+            check_service "http://localhost" "Frontend" || health_status=1
+            ;;
+        "auto")
+            # Detectar automáticamente
+            if docker-compose ps 2>/dev/null | grep -q "Up"; then
+                log "Detectado modo desarrollo"
+                check_service "http://localhost:8000/health" "Backend API" || health_status=1
+                check_service "http://localhost:3000" "Frontend" || health_status=1
+            elif docker-compose -f docker-compose.prod.yml ps 2>/dev/null | grep -q "Up"; then
+                log "Detectado modo producción"
+                check_service "http://localhost:8000/health" "Backend API" || health_status=1
+                check_service "http://localhost" "Frontend" || health_status=1
+            else
+                warning "No se detectaron servicios ejecutándose"
+                health_status=1
+            fi
+            ;;
+        *)
+            error "Modo no válido. Use: dev, prod, o auto"
+            echo "Uso: $0 [dev|prod|auto]"
+            exit 1
+            ;;
+    esac
+
     echo ""
-    echo "💡 Sugerencias:"
-    echo "  - Revisa los logs: ./scripts/logs.sh"
-    echo "  - Reinicia los servicios: ./scripts/deploy.sh"
-    echo "  - Verifica la configuración de Docker"
-    exit 1
-fi
+    if [ $health_status -eq 0 ]; then
+        success "✅ Todos los servicios están saludables"
+        exit 0
+    else
+        error "❌ Algunos servicios no están saludables"
+        echo ""
+        echo "💡 Sugerencias:"
+        echo "   - Verificar logs: ./scripts/logs.sh"
+        echo "   - Reiniciar servicios: ./scripts/deploy.sh restart"
+        echo "   - Verificar configuración de Docker"
+        exit 1
+    fi
+}
+
+main "$@"

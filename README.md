@@ -416,15 +416,13 @@ npm install
 
 ## 📄 Licencia
 
-Este proyecto está bajo la Licencia MIT. Ver el archivo `LICENSE` para más detalles.
+Este proyecto está bajo la Licencia MIT. Ver el archivo [`LICENSE`](LICENSE) para más detalles.
 
-## 👥 Autor
+## 👨‍💻 Autor
 
-- **Miguel Buelvas** - *Desarrollo completo* - [GitHub](https://github.com/miguelbuelvasdev)
-
-### 📞 Contacto
-
+**Miguel Buelvas**
 - **Email**: contacto@miguelbuelvasdev.com
-- **LinkedIn**: [miguelbuelvasdev](https://www.linkedin.com/in/miguelbuelvasdev)
-- **Instagram**: [@miguelbuelvasdev](https://www.instagram.com/miguelbuelvasdev)
-- **GitHub**: [miguelbuelvasdev](https://github.com/miguelbuelvasdev)
+- **LinkedIn**: [linkedin.com/in/miguelbuelvasdev](https://linkedin.com/in/miguelbuelvasdev)
+- **Instagram**: [@miguelbuelvasdev](https://instagram.com/miguelbuelvasdev)
+- **GitHub**: [github.com/miguelbuelvasdev](https://github.com/miguelbuelvasdev)
+
