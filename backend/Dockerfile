@@ -1,31 +1,39 @@
 FROM python:3.11-slim
 
-# Establecer directorio de trabajo
-WORKDIR /app
-
 # Instalar dependencias del sistema necesarias para matplotlib y otros
 RUN apt-get update && apt-get install -y \
     gcc \
     g++ \
     libffi-dev \
     libssl-dev \
+    curl \
     && rm -rf /var/lib/apt/lists/*
 
-# Copiar requirements y instalar dependencias Python
-COPY requirements.txt .
+# Crear usuario no-root para seguridad
+RUN useradd --create-home --shell /bin/bash app \
+    && mkdir -p /app \
+    && chown -R app:app /app
+
+# Establecer directorio de trabajo
+WORKDIR /app
+
+# Cambiar a usuario no-root
+USER app
+
+# Copiar requirements e instalar dependencias Python
+COPY --chown=app:app requirements.txt .
 RUN pip install --no-cache-dir --upgrade pip
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copiar código fuente
-COPY . .
+COPY --chown=app:app . .
 
 # Crear directorios necesarios
 RUN mkdir -p reports static
 
-# Crear usuario no-root para seguridad
-RUN useradd --create-home --shell /bin/bash app \
-    && chown -R app:app /app
-USER app
+# Health check
+HEALTHCHECK --interval=30s --timeout=30s --start-period=5s --retries=3 \
+    CMD curl -f http://localhost:8000/health || exit 1
 
 # Exponer puerto
 EXPOSE 8000

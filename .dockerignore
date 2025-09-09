@@ -2,11 +2,6 @@
 .git
 .gitignore
 
-# Docker
-Dockerfile*
-docker-compose*.yml
-.dockerignore
-
 # Documentation
 README.md
 *.md
@@ -26,36 +21,71 @@ README.md
 .DS_Store
 Thumbs.db
 
-# Logs
-*.log
-logs/
-
-# Runtime
-__pycache__/
-*.pyc
-*.pyo
-*.pyd
-.Python
+# Node.js
 node_modules/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# Coverage
-.coverage
-.pytest_cache/
-htmlcov/
-
-# Virtual environments
-.venv/
-venv/
-ENV/
-
-# Build artifacts
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
 build/
+develop-eggs/
 dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
 *.egg-info/
+.installed.cfg
+*.egg
+
+# Docker
+Dockerfile*
+docker-compose*.yml
+.dockerignore
+
+# Logs
+logs/
+*.log
 
 # Temporary files
-*.tmp
-*.temp
+tmp/
+temp/
+
+# Reports and static (will be generated)
+backend/reports/
+backend/static/
+
+# Frontend build artifacts (will be generated)
+frontend/dist/
+frontend/build/
+
+# Testing
+coverage/
+.nyc_output/
+.pytest_cache/
+.tox/
+
+# CI/CD
+.github/
+scripts/
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# Certificates
+*.pem
+*.key
+*.crt

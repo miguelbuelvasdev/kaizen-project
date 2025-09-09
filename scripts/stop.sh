@@ -1,17 +1,41 @@
 #!/bin/bash
 
-# Script para detener los servicios
+# Script para detener servicios de Mini Kaizen Cafetería
 # Uso: ./scripts/stop.sh [dev|prod]
 
 ENVIRONMENT=${1:-dev}
-PROJECT_NAME="mini-kaizen-cafeteria"
-
-echo "🛑 Deteniendo servicios de $PROJECT_NAME en modo: $ENVIRONMENT"
+COMPOSE_FILE="docker-compose.yml"
 
 if [ "$ENVIRONMENT" = "prod" ]; then
-    docker-compose -f docker-compose.prod.yml -p $PROJECT_NAME down --volumes --remove-orphans
-else
-    docker-compose -p $PROJECT_NAME down --volumes --remove-orphans
+    COMPOSE_FILE="docker-compose.prod.yml"
 fi
 
-echo "✅ Servicios detenidos y volúmenes limpiados"
+echo "🛑 Deteniendo servicios en modo: $ENVIRONMENT"
+echo "📄 Usando archivo: $COMPOSE_FILE"
+
+# Verificar que el archivo existe
+if [ ! -f "$COMPOSE_FILE" ]; then
+    echo "❌ Error: $COMPOSE_FILE no encontrado"
+    exit 1
+fi
+
+# Detener servicios
+docker-compose -f $COMPOSE_FILE down
+
+# Opcional: remover volúmenes
+read -p "¿Deseas remover los volúmenes también? (y/N): " -n 1 -r
+echo
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+    echo "🗑️ Removiendo volúmenes..."
+    docker-compose -f $COMPOSE_FILE down -v
+fi
+
+# Opcional: remover imágenes
+read -p "¿Deseas remover las imágenes también? (y/N): " -n 1 -r
+echo
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+    echo "🗑️ Removiendo imágenes..."
+    docker-compose -f $COMPOSE_FILE down --rmi all
+fi
+
+echo "✅ Servicios detenidos exitosamente"

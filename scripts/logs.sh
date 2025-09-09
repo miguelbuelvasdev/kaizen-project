@@ -1,26 +1,30 @@
 #!/bin/bash
 
-# Script para ver logs de los servicios
-# Uso: ./scripts/logs.sh [backend|frontend|all]
+# Script para monitorear logs de Mini Kaizen Cafetería
+# Uso: ./scripts/logs.sh [servicio] [líneas]
 
 SERVICE=${1:-all}
-PROJECT_NAME="mini-kaizen-cafeteria"
+LINES=${2:-50}
+COMPOSE_FILE="docker-compose.yml"
 
-echo "📋 Mostrando logs del servicio: $SERVICE"
+# Detectar si estamos en producción
+if [ -f "docker-compose.prod.yml" ] && [ "$ENV" = "production" ]; then
+    COMPOSE_FILE="docker-compose.prod.yml"
+fi
 
-case "$SERVICE" in
-    backend)
-        docker-compose -p $PROJECT_NAME logs -f backend
+echo "📋 Mostrando logs de: $SERVICE"
+echo "📄 Archivo compose: $COMPOSE_FILE"
+echo "📏 Últimas $LINES líneas"
+echo "----------------------------------------"
+
+case $SERVICE in
+    "backend"|"kaizen-backend")
+        docker-compose -f $COMPOSE_FILE logs -f --tail=$LINES backend
         ;;
-    frontend)
-        docker-compose -p $PROJECT_NAME logs -f frontend
+    "frontend"|"kaizen-frontend")
+        docker-compose -f $COMPOSE_FILE logs -f --tail=$LINES frontend
         ;;
-    all)
-        docker-compose -p $PROJECT_NAME logs -f
-        ;;
-    *)
-        echo "❌ Servicio no válido. Usa: backend, frontend, o all"
-        echo "Uso: $0 [backend|frontend|all]"
-        exit 1
+    "all"|*)
+        docker-compose -f $COMPOSE_FILE logs -f --tail=$LINES
         ;;
 esac

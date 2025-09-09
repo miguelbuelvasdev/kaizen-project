@@ -1,6 +1,17 @@
 # Mini Kaizen — Reducción del tiempo de atención en cafetería
 
+[![CI/CD](https://github.com/miguelbuelvasdev/kaizen-project/workflows/CI/CD%20Pipeline/badge.svg)](https://github.com/miguelbuelvasdev/kaizen-project/actions)
+[![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=flat&logo=docker&logoColor=white)](https://docker.com)
+[![Python](https://img.shields.io/badge/python-3670A0?style=flat&logo=python&logoColor=ffdd54)](https://python.org)
+[![React](https://img.shields.io/badge/react-%2320232a.svg?style=flat&logo=react&logoColor=%2361DAFB)](https://reactjs.org)
+
 Proyecto fullstack para análisis estadístico de mejoras en tiempo de atención usando metodología Kaizen. Incluye simulación de datos, análisis estadístico completo (Welch t-test, Cohen's d) y visualizaciones interactivas.
+
+**Repositorio**: [https://github.com/miguelbuelvasdev/kaizen-project](https://github.com/miguelbuelvasdev/kaizen-project)
+**Autor**: Miguel Buelvas - [contacto@miguelbuelvasdev.com](mailto:contacto@miguelbuelvasdev.com)
+**LinkedIn**: [linkedin.com/in/miguelbuelvasdev](https://linkedin.com/in/miguelbuelvasdev)
+**Instagram**: [@miguelbuelvasdev](https://instagram.com/miguelbuelvasdev)
+**GitHub**: [@miguelbuelvasdev](https://github.com/miguelbuelvasdev)
 
 ## 🎯 Características
 
@@ -15,26 +26,59 @@ Proyecto fullstack para análisis estadístico de mejoras en tiempo de atención
 
 ```
 mini-kaizen-cafeteria/
-├── backend/                    # API Python (FastAPI)
-│   ├── .venv/                 # Virtual environment
-│   ├── src/                   # Código fuente
-│   │   ├── generate_data.py   # Simulador de datos
-│   │   ├── statistical_analysis.py # Análisis estadístico
-│   │   └── visualization.py   # Generación de gráficos
-│   ├── reports/               # Reportes y gráficos generados
-│   ├── static/                # Archivos estáticos
-│   ├── requirements.txt       # Dependencias Python
-│   └── main.py               # Punto de entrada API
-├── frontend/                  # Aplicación React
-│   ├── src/                  # Código fuente React
-│   │   ├── components/       # Componentes reutilizables
-│   │   ├── pages/           # Páginas principales
-│   │   ├── services/        # Servicios API
-│   │   └── utils/           # Utilidades
-│   ├── public/              # Archivos públicos
-│   └── package.json         # Dependencias Node.js
-└── README.md
+├── 📁 backend/                    # 🔧 API Python (FastAPI)
+│   ├── 📖 README.md              # 📚 Documentación completa del backend
+│   ├── 🚀 main.py                # 🎯 Punto de entrada principal
+│   ├── 📦 requirements.txt       # 🐍 Dependencias Python
+│   ├── 🐳 Dockerfile             # 🐳 Configuración Docker
+│   ├── ⚙️ pyrightconfig.json     # 🔍 Configuración Pyright
+│   ├── 📂 src/                   # 💻 Código fuente principal
+│   │   ├── 🎲 generate_data.py      # 📊 Generador de datos simulados
+│   │   ├── 📈 statistical_analysis.py # 🔬 Análisis estadístico completo
+│   │   └── 📊 visualization.py      # 🎨 Generación de gráficos
+│   ├── 📊 reports/               # 📈 Reportes y gráficos generados
+│   ├── 🖼️ static/                # 📁 Archivos estáticos servidos
+│   └── 🐍 .venv/                 # 🌐 Virtual environment (desarrollo)
+├── 📁 frontend/                  # ⚛️ Aplicación React
+│   ├── 📖 README.md              # 📚 Documentación completa del frontend
+│   ├── 🌐 index.html             # 🎯 HTML principal
+│   ├── 📦 package.json           # 📋 Configuración y dependencias
+│   ├── 🐳 Dockerfile             # 🐳 Configuración Docker
+│   ├── ⚙️ vite.config.js         # ⚡ Configuración de Vite
+│   ├── 🎨 tailwind.config.js     # 💅 Configuración de Tailwind
+│   ├── 📂 src/                   # 💻 Código fuente React
+│   │   ├── 🏠 App.jsx               # 🎯 Componente principal
+│   │   ├── 🚀 main.jsx             # 🎯 Punto de entrada React
+│   │   ├── 🎨 index.css            # 💅 Estilos globales
+│   │   ├── 🖼️ assets/              # 📁 Recursos estáticos
+│   │   ├── 🧩 components/          # 🔧 Componentes reutilizables
+│   │   ├── 📄 pages/               # 📱 Páginas principales
+│   │   ├── 🔗 services/            # 🌐 Comunicación con API
+│   │   ├── 🪝 hooks/               # 🎣 Hooks personalizados
+│   │   └── 🛠️ utils/               # 🔧 Utilidades
+│   └── 🌐 nginx.conf              # 🌐 Configuración Nginx
+├── 📁 scripts/                   # 🚀 Scripts de automatización
+│   ├── 🚀 deploy.sh              # 📦 Deployment automatizado
+│   ├── 📋 logs.sh                # 📝 Monitoreo de logs
+│   ├── 🛑 stop.sh                # ⏹️ Detención de servicios
+│   └── ✅ health-check.sh        # 🔍 Verificación de salud
+├── 📁 .github/                   # 🤖 CI/CD
+│   └── 📋 workflows/             # 🔄 GitHub Actions
+├── 🐳 docker-compose.yml         # 🐳 Configuración desarrollo
+├── 🐳 docker-compose.prod.yml    # 🐳 Configuración producción
+├── 📖 README.md                  # 📚 Documentación principal
+├── 🔧 .gitignore                 # 🚫 Archivos ignorados
+├── 🌐 .dockerignore              # 🚫 Docker build exclusions
+└── ⚙️ .env.example               # 🔑 Variables de entorno
 ```
+
+### 📚 Documentación Detallada
+
+Para información completa sobre cada parte del proyecto:
+
+- **📖 [Backend Documentation](backend/README.md)** - API FastAPI, análisis estadístico, configuración
+- **📖 [Frontend Documentation](frontend/README.md)** - React, componentes, UI/UX, configuración
+- **🚀 [Deployment Guide](coolify-deployment.md)** - Guía completa de deployment con Coolify
 
 ## 🚀 Instalación y configuración
 
@@ -85,7 +129,10 @@ git clone https://github.com/miguelbuelvasdev/kaizen-project.git
 cd mini-kaizen-cafeteria
 ```
 
-#### 2. Configurar Backend (Python + FastAPI)
+### 2. Configurar Backend (Python + FastAPI)
+
+#### Opción A: Desarrollo Local
+
 ```bash
 # Navegar al directorio backend
 cd backend
@@ -106,6 +153,35 @@ mkdir -p reports static
 # Volver al directorio raíz
 cd ..
 ```
+
+#### Opción B: Docker (Recomendado)
+
+```bash
+# Para desarrollo
+./scripts/deploy.sh dev
+
+# Para producción
+./scripts/deploy.sh prod
+
+# Verificar estado
+./scripts/health-check.sh
+
+# Ver logs
+./scripts/logs.sh
+
+# Detener servicios
+./scripts/stop.sh
+```
+
+#### Opción C: Deployment con Coolify
+
+1. **Crear proyecto en Coolify** apuntando a este repositorio
+2. **Configurar servicios** usando `docker-compose.prod.yml`
+3. **Variables de entorno** según `.env.example`
+4. **Dominios**: Configurar frontend y api subdomain
+5. **Deploy automático** desde GitHub Actions
+
+Ver [Guía de Deployment en Coolify](coolify-deployment.md) para instrucciones detalladas.
 
 #### 3. Configurar Frontend (React + Vite)
 ```bash
