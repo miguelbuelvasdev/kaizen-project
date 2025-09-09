@@ -1,0 +1,47 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: kaizen-backend
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend:/app
+      - backend-reports:/app/reports
+      - backend-static:/app/static
+    environment:
+      - PYTHONPATH=/app
+      - PYTHONUNBUFFERED=1
+      - ENV=development
+      - DEBUG=True
+      - PORT=8000
+    networks:
+      - kaizen-network
+    restart: unless-stopped
+    command: uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: kaizen-frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+    networks:
+      - kaizen-network
+    restart: unless-stopped
+    environment:
+      - VITE_API_URL=http://backend:8000
+
+volumes:
+  backend-reports:
+  backend-static:
+
+networks:
+  kaizen-network:
+    driver: bridge

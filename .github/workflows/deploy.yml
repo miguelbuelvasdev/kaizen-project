@@ -1,0 +1,72 @@
+name: Deploy to Coolify
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+
+    - name: Install backend dependencies
+      run: |
+        cd backend
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Run backend tests
+      run: |
+        cd backend
+        python -c "import src.generate_data; import src.statistical_analysis; import src.visualization; print('✅ Backend modules imported successfully')"
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+        cache-dependency-path: frontend/package-lock.json
+
+    - name: Install frontend dependencies
+      run: |
+        cd frontend
+        npm ci
+
+    - name: Build frontend
+      run: |
+        cd frontend
+        npm run build
+
+    - name: Check frontend build
+      run: |
+        cd frontend
+        if [ -d "dist" ]; then
+          echo "✅ Frontend build successful"
+          ls -la dist/
+        else
+          echo "❌ Frontend build failed"
+          exit 1
+        fi
+
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
+
+    steps:
+    - name: Deploy to Coolify
+      uses: coolify/deploy-action@v1
+      with:
+        api_token: ${{ secrets.COOLIFY_API_TOKEN }}
+        project: ${{ secrets.COOLIFY_PROJECT }}
+        server: ${{ secrets.COOLIFY_SERVER }}
+        branch: main

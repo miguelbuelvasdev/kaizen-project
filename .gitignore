@@ -80,3 +80,32 @@ logs/
 
 # WSL specific
 .wslconfig
+
+# Docker volumes (local development)
+backend-reports/
+backend-static/
+
+# Coolify deployment
+.coolify/
+
+# Deployment scripts (keep in repo)
+# scripts/ - NOT ignored, keep deployment scripts
+
+# Environment files
+.env
+.env.local
+.env.production
+.env.staging
+
+# SSL certificates
+*.pem
+*.key
+*.crt
+
+# Backup files
+*.bak
+*.backup
+
+# Temporary deployment files
+deploy.log
+build.log

@@ -1,0 +1,66 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: kaizen-backend-prod
+    ports:
+      - "8000:8000"
+    volumes:
+      - backend-reports:/app/reports
+      - backend-static:/app/static
+    environment:
+      - PYTHONPATH=/app
+      - PYTHONUNBUFFERED=1
+      - ENV=production
+      - DEBUG=False
+      - PORT=8000
+    networks:
+      - kaizen-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    deploy:
+      resources:
+        limits:
+          memory: 1G
+        reservations:
+          memory: 512M
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: kaizen-frontend-prod
+    ports:
+      - "80:80"
+    depends_on:
+      backend:
+        condition: service_healthy
+    networks:
+      - kaizen-network
+    restart: unless-stopped
+    environment:
+      - VITE_API_URL=http://backend:8000
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+        reservations:
+          memory: 256M
+
+volumes:
+  backend-reports:
+    driver: local
+  backend-static:
+    driver: local
+
+networks:
+  kaizen-network:
+    driver: bridge
